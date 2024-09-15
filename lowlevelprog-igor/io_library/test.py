@@ -45,10 +45,10 @@ def compile( fname, text ):
     f.close()
 
     if subprocess.call( ['nasm', '-f', 'elf64', fname + '.asm', '-o', fname+'.o'] ) == 0 and subprocess.call( ['ld', '-o' , fname, fname+'.o'] ) == 0:
-             print(' ', fname, ': compiled')
+             print ' ', fname, ': compiled'
              return True
     else: 
-        print(' ', fname, ': failed to compile')
+        print ' ', fname, ': failed to compile'
         return False
 
 
@@ -88,7 +88,7 @@ class Test:
         if res is None:
             return False
         (output, code) = res
-        print('"', arg,'" ->',  res)
+        print '"', arg,'" ->',  res
         return self.checker( arg, output, code )
 
 before_call="""
@@ -174,29 +174,6 @@ tests=[ Test('string_length',
         call print_string
         """ + after_call + """
 
-        mov rax, 60
-        xor rdi, rdi
-        syscall""", 
-        lambda i,o,r: i == o),
-
-        Test('string_copy',
-            lambda v: """
-        section .data
-        arg1: db '""" + v + """', 0
-        arg2: times """ + str(len(v) + 1) +  """ db  66
-        section .text
-        %include "lib.inc"
-        global _start 
-        _start:
-        """ + before_call + """
-        mov rdi, arg1
-        mov rsi, arg2
-        mov rdx, """ + str(len(v) + 1) + """
-        call string_copy
-
-        """ + after_call + """
-        mov rdi, arg2 
-        call print_string
         mov rax, 60
         xor rdi, rdi
         syscall""", 
@@ -419,7 +396,30 @@ tests=[ Test('string_length',
         mov rax, 60
         xor rdi, rdi
         syscall""", 
-        lambda i,o,r: o.find("too long") != -1 ) 
+        lambda i,o,r: o.find("too long") != -1 ),
+        
+        Test('string_copy',
+            lambda v: """
+        section .data
+        arg1: db '""" + v + """', 0
+        arg2: times """ + str(len(v) + 1) +  """ db  66
+        section .text
+        %include "lib.inc"
+        global _start 
+        _start:
+        """ + before_call + """
+        mov rdi, arg1
+        mov rsi, arg2
+        mov rdx, """ + str(len(v) + 1) + """
+        call string_copy
+
+        """ + after_call + """
+        mov rdi, arg2 
+        call print_string
+        mov rax, 60
+        xor rdi, rdi
+        syscall""", 
+        lambda i,o,r: i == o)
         ]
 
 
@@ -461,17 +461,17 @@ if __name__ == "__main__":
         for arg in inputs[t.name]:
             if not found_error:
                 try:
-                    print('          testing', t.name,'on "'+ arg +'"')
+                    print '          testing', t.name,'on "'+ arg +'"'
                     res = t.perform(arg)
                     if res: 
-                        print('  [', colored('  ok  ', 'green'), ']')
+                        print '  [', colored('  ok  ', 'green'), ']'
                     else:
-                        print('* [ ', colored('fail', 'red'),  ']')
+                        print '* [ ', colored('fail', 'red'),  ']'
                         found_error = True
                 except:
-                    print('* [ ', colored('fail', 'red'),  '] with exception' , sys.exc_info()[0])
+                    print '* [ ', colored('fail', 'red'),  '] with exception' , sys.exc_info()[0]
                     found_error = True
     if found_error:
-        print('Not all tests have been passed')
+        print 'Not all tests have been passed'
     else:
-        print(colored( "Good work, all tests are passed", 'green'))
+        print colored( "Good work, all tests are passed", 'green')
