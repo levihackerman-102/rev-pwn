@@ -1,5 +1,9 @@
-section .data
-        input: db '1', 0
+
+            section .rodata
+            err_too_long_msg: db "string is too long", 10, 0
+            section .data
+        arg1: db '', 0
+        arg2: times 0 db  66
         section .text
         %include "lib.inc"
         global _start 
@@ -21,8 +25,16 @@ push r13
 push r14 
 push r15 
 
-        mov rdi, input
-        call parse_uint
+        mov rdi, arg1
+        mov rsi, arg2
+        mov rdx, 0
+        call string_copy
+        test rax, rax
+        jnz .good
+        mov rdi, err_too_long_msg 
+        call print_string
+        jmp _exit
+        .good:
         
 cmp r15, [rsp] 
 jne .convention_error
@@ -60,9 +72,9 @@ err_calling_convention: db "You did not respect the calling convention! Check th
 section .text
 continue:
 
-        push rdx
-        mov rdi, rax
-        call print_uint
+        mov rdi, arg2 
+        call print_string
+        _exit:
         mov rax, 60
-        pop rdi
+        xor rdi, rdi
         syscall
