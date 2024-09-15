@@ -88,8 +88,14 @@ string_equals:
         ret
 
 read_char:
+    push 0
     xor rax, rax
-    ret 
+    xor rdi, rdi
+    mov rsi, rsp
+    mov rdx, 1
+    syscall
+    pop rax
+    ret
 
 read_word:
     ret
