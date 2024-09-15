@@ -97,7 +97,64 @@ read_char:
     pop rax
     ret
 
+; rdi: buffer address, rsi: buffer size 
 read_word:
+    push r14
+    push r15
+    xor r14, r14 
+    mov r15, rsi
+    dec r15
+
+    .A:
+    push rdi
+    call read_char
+    pop rdi
+    cmp al, ' '
+    je .A
+    cmp al, 9
+    je .A
+    cmp al, 10
+    je .A 
+    cmp al, 13
+    je .A
+    test al, al
+    jz .C
+
+    .B:
+    mov byte [rdi + r14], al
+    inc r14
+
+    push rdi
+    call read_char
+    pop rdi
+    cmp al, ' '
+    je .C
+    cmp al, 10
+    je .C
+    cmp al, 13
+    je .C 
+    cmp al, 9
+    je .C
+    test al, al
+    jz .C
+    cmp r14, r15
+    je .D
+
+    jmp .B
+
+    .C:
+    mov byte [rdi + r14], 0
+    mov rax, rdi 
+   
+    mov rdx, r14 
+    pop r15
+    pop r14
+    ret
+
+    .D:
+    xor rax, rax
+    pop r15
+    pop r14
     ret
 
 ; rdi points to a string
