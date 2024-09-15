@@ -220,6 +220,24 @@ tests=[ Test('string_length',
         xor rdi, rdi
         syscall""", 
         lambda i, o, r: o == i),
+        
+        Test('string_equals',
+             lambda v: """section .data
+             str1: db '""" + v + """',0
+             str2: db '""" + v + """',0
+        section .text
+        %include "lib.inc"
+        global _start
+        _start:
+        """ + before_call + """
+        mov rdi, str1
+        mov rsi, str2
+        call string_equals
+        """ + after_call + """
+        mov rdi, rax
+        mov rax, 60
+        syscall""",
+        lambda i,o,r: r == 1),
 
         Test('read_char',
              lambda v:"""section .text
@@ -330,24 +348,6 @@ tests=[ Test('string_length',
         mov rax, 60
         syscall""", 
         lambda i,o,r: (starts_int( i )[1] == 0 and int(o) == 0) or (starts_int(i)[0] == int(o) and r == starts_int( i )[1] )),
-
-        Test('string_equals',
-             lambda v: """section .data
-             str1: db '""" + v + """',0
-             str2: db '""" + v + """',0
-        section .text
-        %include "lib.inc"
-        global _start
-        _start:
-        """ + before_call + """
-        mov rdi, str1
-        mov rsi, str2
-        call string_equals
-        """ + after_call + """
-        mov rdi, rax
-        mov rax, 60
-        syscall""",
-        lambda i,o,r: r == 1),
  
         Test('string_equals not equals',
              lambda v: """section .data

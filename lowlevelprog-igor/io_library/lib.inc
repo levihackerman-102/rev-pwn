@@ -12,7 +12,7 @@ string_length:
         je .end
         inc rax
         jmp .loop
-    .end    
+    .end:    
         ret
 
 print_string:
@@ -45,7 +45,7 @@ print_uint:
     dec rdi
     mov r8, 10
 
-    .loop
+    .loop:
         xor rdx, rdx
         div r8
         or dl, 0x30
@@ -60,13 +60,32 @@ print_uint:
         ret
 
 print_int:
-    xor rax, rax
+    test rdi, rdi
+    jns print_uint
+    push rdi
+    mov rdi, '-'
+    call print_char
+    pop rdi
+    neg rdi
+    call print_uint
     ret
 
 string_equals:
-    xor rax, rax
-    ret
+    mov al, byte[rdi]
+    cmp al, byte[rsi]
+    jne .not_equal
+    inc rdi
+    inc rsi
+    test al, al
+    jnz string_equals
 
+    .equal:
+        mov rax, 1
+        ret
+
+    .not_equal:
+        xor rax, rax
+        ret
 
 read_char:
     xor rax, rax
