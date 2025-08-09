@@ -1,0 +1,5 @@
+Keep following the xor code till the xor decoding loops and then examine the memory near the decoded strings to find the flag
+
+0019FE59  1D 00 00 00 73 75 63 68 2E 35 68 33 31 31 30 31  ....such.5h31101  
+0019FE69  30 31 30 31 40 66 6C 61 72 65 2D 6F 6E 2E 63 6F  0101@flare-on.co  
+0019FE79  6D 68 6E 74 00 00 68 20 73 70 65 68 20 69 27 6D  mhnt..h speh i'm  
