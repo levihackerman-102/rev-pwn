@@ -1,0 +1,19 @@
+1. Integer list
+2. Get sum
+3. Get constant
+4. Custom Call
+5. Exit
+>> 4
+You get to specify the values of several registers before
+bx r3 is executed.
+r3 (in hex): 
+>> 10a1c
+r2 (in hex): 
+>> 0
+r1 (in hex): 
+>> 4
+r0 (in hex): 
+>> 21
+flag{ez_@s_r0_t0_r3}
+==== EXECUTION FINISHED ====
+wdb>

@@ -1,0 +1,20 @@
+Executing 01_arm_intro_arm_thumb in Live Mode
+Started '01_arm_intro_arm_thumb'
+------------------------------------------------------------
+--[ Reverse Engineering - Intro to ARM/Thumb                
+------------------------------------------------------------
+Which function do you want to call? (0 - sum_arm, 1 - sum_thumb): 
+>> 1
+Choose the lsb for the branch address: 
+>> 1
+sum_thumb() = 223695
+Where to go next (in hex)? 
+>> 21075
+$ 
+>> ls
+flag
+$ 
+>> cat flag
+flag{itz_l1k3_2_cpu_1n_1}
+$ 
+>> 
