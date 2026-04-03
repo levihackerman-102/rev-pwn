@@ -1,0 +1,26 @@
+wdb> r
+Started '01_arm_addressing_modes'
+1. Get sum
+2. Get constant
+3. Take Quiz
+4. Cancel
+>> 3
+Suppose that
+r0 = 0,
+r1 = 4,
+r2 = address of the int array[] = {1, 2, 3, 4, 5}
+What will be the value of r0 after 
+ldr r0, [r2]
+>> 1
+Thats right!
+What will be the value of r0 after the following two instructions?
+ldr r0, [r1, r2]!
+ldr r0, [r1]
+>> 2
+And what will r0 be after the following instructions?
+str r0, [r1], #8
+ldr r2, [r1]
+ldr r0, [r1, r2]!
+>> 5
+Congratulations! You are correct!
+==== EXECUTION FINISHED ====
